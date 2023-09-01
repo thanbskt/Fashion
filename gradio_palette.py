@@ -1,5 +1,4 @@
 from PIL import Image
-import numpy as np
 import requests
 from colorthief import ColorThief
 import matplotlib.pyplot as plt
@@ -83,12 +82,12 @@ def color_thief(file):
     
     
     fig = plt.figure(layout="constrained")
-    gs = GridSpec(3, 1, figure=fig)
+    gs = GridSpec(4, 1, figure=fig)
 
     ax1 = fig.add_subplot(gs[0])
     ax2 = fig.add_subplot(gs[1])
     ax3 = fig.add_subplot(gs[2])
-
+    ax4 = fig.add_subplot(gs[3])
 
     ax1.imshow(img)
     ax1.set_title('Image')
@@ -98,7 +97,12 @@ def color_thief(file):
 
     ax3.imshow([[colors[result[i]] for i in range(len(result))]])
     ax3.set_title('Thier corresponding cluster')
-    fig.suptitle("Color detection and clustering, metric:CIE 2000")
+    
+    
+    ax4.imshow([[color_values[i] for i in range(len(color_values))]])
+    ax4.set_title('Our palette')
+    
+    fig.suptitle("Color detection and clustering")
     plt.show()
     
     return fig
@@ -109,7 +113,7 @@ outputs = gr.Plot()
 examples = [["twitter_profile_pic.jpg"]]
 
 allow_flagging = 'manual'
-flagging_options = ['Image in displayed wrong','Dominant Color is wrong','First Clustering is wrong', 'Second Clustering is wrong']
+flagging_options = ['Image in displayed wrong','Clustering is wrong','Clustering is right', 'Model crashes']
 
 demo = gr.Interface(color_thief, 
                     inputs=inputs, 
@@ -119,4 +123,4 @@ demo = gr.Interface(color_thief,
                     description=description,
                     allow_flagging = allow_flagging,
                     flagging_options = flagging_options)
-demo.launch(share=True)
+demo.launch(server_name=("0.0.0.0"),auth=("fashion","sustain"))
