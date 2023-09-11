@@ -10,7 +10,7 @@ from tensorflow.keras.preprocessing import image
 from tensorflow.keras.preprocessing.image import load_img 
 from tensorflow.keras.applications.xception import preprocess_input
 
-model = load_model('/notebooks/model_class_polyvore_vong_v1_NO_prob.h5')
+model = load_model('/home/thanos/Desktop/model_class_polyvore_vong_v1_NO_prob.h5')
 
 
 class_names={0: 'Accessories',

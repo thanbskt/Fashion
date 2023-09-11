@@ -9,7 +9,7 @@ from colormath.color_objects import sRGBColor, LabColor
 from colormath.color_conversions import convert_color
 from colormath.color_diff import delta_e_cie2000
 from collections import OrderedDict
-
+import numpy as np
 
 colors ={
 "white": (255,255,255),
@@ -123,4 +123,4 @@ demo = gr.Interface(color_thief,
                     description=description,
                     allow_flagging = allow_flagging,
                     flagging_options = flagging_options)
-demo.launch(server_name=("0.0.0.0"),auth=("fashion","sustain"))
+demo.launch(auth=("fashion","sustain"))
